@@ -1,3 +1,4 @@
+import { useReminders } from "@/contex/ReminderContex";
 import * as Location from "expo-location";
 import { useEffect, useState } from "react";
 import { Alert, Pressable, Text, TextInput, View } from "react-native";
@@ -9,6 +10,7 @@ const SetReminderScreen = () => {
   );
   const [permissionStatus, setPermissionStatus] =
     useState<Location.PermissionStatus | null>(null);
+  const { addReminder } = useReminders();
 
   useEffect(() => {
     (async () => {
@@ -37,13 +39,18 @@ const SetReminderScreen = () => {
         "Missing Info",
         "Please enter a title and ensure location is available",
       );
+
       return;
     }
 
-    Alert.alert(
-      "Reminder Set",
-      `Title: ${title}\nLat:${location.coords.latitude}\nLng: ${location.coords.longitude}`,
-    );
+    addReminder({
+      title,
+      latitude: location?.coords.latitude as number,
+      longitude: location?.coords.longitude as number,
+    });
+
+    Alert.alert("Success", "Reminder saved!");
+    setTitle("");
   };
 
   return (
