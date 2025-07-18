@@ -1,6 +1,6 @@
-import { useReminders } from "@/contex/ReminderContex";
-import { Link } from "expo-router";
-import { FlatList, Pressable, Text, View } from "react-native";
+import { useReminders } from '@/contex/ReminderContex';
+import { Link } from 'expo-router';
+import { FlatList, Pressable, Text, View } from 'react-native';
 
 export default function HomeScreen() {
   const { reminders } = useReminders();
@@ -21,7 +21,7 @@ export default function HomeScreen() {
             <View className='mb-2 p-3 bg-gray-100 rounded'>
               <Text className='font-semibold'>{item.title}</Text>
               <Text className='text-sm text-gray-600'>
-                Lat: {item.latitude.toFixed(5)} | Lng:{" "}
+                Lat: {item.latitude.toFixed(5)} | Lng:{' '}
                 {item.longitude.toFixed(5)}
               </Text>
             </View>
@@ -32,6 +32,12 @@ export default function HomeScreen() {
       <Link href='/set-reminder' asChild>
         <Pressable className='bg-blue-600 py-3 px-4 rounded mt-6 items-center'>
           <Text className='text-white font-semibold'>+ Set a New Reminder</Text>
+        </Pressable>
+      </Link>
+
+      <Link href='/map' asChild>
+        <Pressable className='bg-green-600 py-3 px-4 rounded mt-3 items-center'>
+          <Text className='text-white font-semibold'>🗺 View Map</Text>
         </Pressable>
       </Link>
     </View>
